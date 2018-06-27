@@ -7,15 +7,17 @@ type Query {
 }
 
 type Hero {
-  id: ID,
+  id: Int,
   name: String
 }
 `
-const hero1 = {id: 12, name:"ada"};
+const heros = [{id: 12, name:"R2D2"},{id: 13, name:"BB8"}];
 const resolvers = {
   Query: {
     description: () => `This is the API for a simple blogging application`,
-    hero: () => hero1
+    hero(root, args, context, info) {
+      return heros.find(k => k.id === args.id);  
+    }
   }
 }
 
